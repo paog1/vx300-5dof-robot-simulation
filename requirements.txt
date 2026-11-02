@@ -1,0 +1,5 @@
+numpy
+proxsuite
+pin
+# RobotDART Python bindings are installed separately; follow the official
+# RobotDART installation instructions for your operating system.
