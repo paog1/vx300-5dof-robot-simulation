@@ -39,7 +39,7 @@ class IK_QP:
         #Initializzig the QP problem
         success = False
         qp = proxsuite.proxqp.dense.QP(self.qp_dim,self.qp_dim_eq,self.qp_dim_in)
-        qk = np.array([0,0,0,0,0])
+        qk = np.zeros(self.qp_dim)
         error = np.ones((6,1))
 
         for _ in range(100000):
@@ -69,7 +69,7 @@ class IK_QP:
 
             #QP Parameters
             Q = J.T@J
-            q = -J.T@error
+            q = (-J.T@error).ravel()  # proxsuite needs a 1-D vector, not (5,1)
             C = np.eye(self.qp_dim)*self.step
             d_min = self.q_min - qk
             d_max = self.q_max - qk
